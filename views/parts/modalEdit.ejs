@@ -1,0 +1,45 @@
+<!-- Modal -->
+<div class="modal fade" id="modal-div-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form id="modal-form-edit" action="/expenses/edit" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit row</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="text" id="modal-input-id" name="id" hidden>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="span-spent-on">Spent on</span>
+                        </div>
+                        <input type="text" id="modal-input-spent-on" name="spent_on" class="form-control">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Amount</span>
+                        </div>
+                        <input type="number" class="form-control" id="modal-input-amount" name="amount">
+                        <div class="input-group-append">
+                            <span id="modal-span-currency" class="input-group-text">.00</span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="span-date">Date</span>
+                        </div>
+                        <input type="text" id="modal-input-date" class="form-control" disabled>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="submitModalForm('edit')">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

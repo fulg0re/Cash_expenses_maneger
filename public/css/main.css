@@ -1,0 +1,18 @@
+.authentication-center {
+    margin: 1% auto;
+    width: 300px;
+    border: 1px solid red;
+}
+
+.page-content-title {
+    text-align: center;
+}
+
+.auth-input {
+    text-align: center;
+}
+
+#chartContainer {
+    height: 365px;
+    width: 100%;
+}

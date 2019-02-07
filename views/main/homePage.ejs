@@ -1,0 +1,113 @@
+<% layout('../layout/mainLayout.ejs') -%>
+
+<button type="button"
+        class="btn btn-primary"
+        id="button-collapse"
+        data-toggle="collapse"
+        data-target="#collapse-div-table"
+        aria-expanded="false"
+        aria-controls="collapse-div">
+    Show / Hide data
+</button>
+<button type="button" class="btn btn-success" onclick="addNewData()">+</button>
+
+<div class="collapse" id="collapse-div-table">
+    <button type="button"
+            class="btn btn-dark"
+            id="button-collapse-filter"
+            data-toggle="collapse"
+            data-target="#collapse-div-filter"
+            aria-expanded="false"
+            aria-controls="collapse-div-filter">
+        Filter
+    </button>
+
+    <div class="collapse" id="collapse-div-filter">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="span-day-label">Day (1 - 31)</span>
+        </div>
+        <input type="text" id="filter-input-day" class="form-control" >
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="span-month-label">Month (1 - 12)</span>
+        </div>
+        <input type="text" id="filter-input-month" class="form-control" >
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="span-year-label">Year (2019)</span>
+        </div>
+        <input type="text" id="filter-input-year" class="form-control" >
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="span-limit-label">Limit</span>
+        </div>
+        <input type="text" id="filter-input-limit" class="form-control" >
+      </div>
+
+      <button type="button" class="btn btn-success" onclick="applyFilter()">
+        Apply filters
+      </button>
+      <button type="button" class="btn btn-danger" onclick="clearFilter()">
+        Clear filters
+      </button>
+    </div>
+
+    <% if (userExpenses.length === 0) {%>
+
+        <p style="text-align: center">Sorry, but no data found</p>
+
+    <% } else { %>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Spent on</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <% var count = 1; %>
+            <% userExpenses.forEach(function(expense) { %>
+
+                <% var date = expense.day + '-' + expense.month + '-' + expense.year + ' '; %>
+                <% date += expense.hour + ':' + expense.minute + ':' + expense.second; %>
+
+                <tr>
+                    <th scope="row"><%- count %></th>
+                    <td><%- expense.spent_on %></td>
+                    <td><%- expense.amount + ' ' + currency %></td>
+                    <td><%- date %></td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="editRowData(<%- expense._id %>)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteRowData(<%- expense._id %>)">Delete</button>
+                    </td>
+                </tr>
+
+                <% count++; %>
+
+            <% }); %>
+
+            </tbody>
+        </table>
+
+    <% } %>
+</div>
+
+<div class="container">
+    <canvas id="canvas-statistic-chart"></canvas>
+</div>
+
+<% include ../parts/modalEdit.ejs %>
+<% include ../parts/modalAdd.ejs %>
